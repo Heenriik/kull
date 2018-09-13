@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Drivstoff?</title>
+<meta charset="UTF-8" />
+	<script>
+		//alert("hei");
+		//vente til siden er ferdig bygd
+		window.onload=oppstart;
+		function oppstart() {
+            //alert("Start");
+		}
+        //funksjoon for å se hvis et gyldig nr. er sat inn
+        function kjør() {
+            var tall = document.getElementById("tall").value;
+
+            if(tall>80){
+                alert("Tanken rommer ikke mer enn 80 liter.");
+            }
+            else if(tall<6 && tall>-1){
+                alert("Vi selger ikke drivstoff i så små kvanter, venligst velg mimimun 6 liter.");             
+            }
+            else if(tall<0){
+                alert("Vi tar desverre ikke drivstoff i retur.");
+            }
+        }
+
+        //funksjon for å regne ut hva prisen blir
+        function regn() {
+            var b = 13.40;
+            var d = 12.90;
+            var tall = document.getElementById("tall").value;
+
+            if(document.getElementById("bensin").checked && tall<81 && tall>5){
+                document.getElementById("utskrift").innerHTML = "Prisen blir " + tall * 13.40 + "kr";
+            }
+            else if(document.getElementById("diesel").checked && tall<81 && tall>5){
+                document.getElementById("utskrift").innerHTML = "Prisen blir " + tall * 12.90 + "kr";
+            }  
+        }
+
+        //to funksjoner for å gi beskjed til kunde om hva prisen er når "radio-kanpp"" blir markert
+        function bensin() {
+            alert("Bensinprisen er 13,40 kr/L");
+        }
+        function diesel() {
+            alert("Dieselprisen er 12,90 kr/L");
+        }
+
+        //funksjon for å nullstille
+        function ree() {
+            if(document.getElementById("bensin").checked || document.getElementById("diesel").checked){
+                document.getElementById("bensin").checked = false;
+                document.getElementById("diesel").checked = false;
+                document.getElementById("utskrift").innerHTML = "";
+                document.getElementById("tall").value = "";
+            }
+        }
+       
+	</script>
+	<style>
+        h1 {
+            margin-left: 1%;
+        }
+
+		#utskrift {
+			position: absolute;
+			margin-left: 1%;
+            padding-top: 1%;
+            font-weight: bold;
+		}
+
+        #kul {
+            margin-left: 1%;
+        }
+        
+        td {
+            padding-bottom: 5px;
+        }
+	</style>
+</head>
+
+<body>
+
+	<h1>Pris for drivstoff</h1>
+    
+        <div id="kul">
+            <table>
+                <tr>
+                    <td><input type="radio" id="bensin" name="grp" value="bensin" onchange="bensin()"/>Bensin</td>
+                    <td><input type="radio" id="diesel" name="grp" value="diesel" onchange="diesel()"/>Diesel</td>
+                </tr>
+                <tr>
+                    <td>Ant. liter:</td><td><input type="number" id="tall" placeholder=""/></td>
+                    <td><button type="button" onclick="kjør(); regn();"/>Regn ut<td>
+                    <td><input type="button" onclick="ree()" value="Nullstill"/></td>
+                </tr>      
+            </table>  
+        </div>
+
+	    <div id="utskrift">
+		
+	    </div>
+
+</body>
+</html>	
